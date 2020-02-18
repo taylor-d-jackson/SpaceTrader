@@ -40,9 +40,9 @@ namespace ConsoleApp1
             shop.Add(new GoodsList("Alien Relics", 9));
             shop.Add(new GoodsList("Iron", 10));
             shop.Add(new GoodsList("Platinum", 55));
-            foreach (var item in shop)
+            foreach (var value in shop)
             {
-                Console.WriteLine(item);
+                Console.WriteLine(value);
             }
         }
     }

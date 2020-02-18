@@ -33,7 +33,7 @@ namespace ConsoleApp1
             var classVoliv = new Voliv();
 
 
-
+            //TODO: Call and print the shop list values for each planet.
             //TODO: Select a location to travel from a scrolling list model. Use task tracker as a model.
 
             Console.WriteLine($"Where would you like to travel: {earth} || {alphaCentauri} || {altari} || {zadesta} || {voliv} ");
@@ -50,7 +50,7 @@ namespace ConsoleApp1
                     
                             gameData.TravelCounter++;
                             gameData.Age = gameData.Age + 4;
-                            classEarth.EarthGoods();
+                            
 
                             
                             
