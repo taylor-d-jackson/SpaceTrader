@@ -7,7 +7,7 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             Console.SetWindowSize(160, 50);
-            var gameData = new GameData(0, 21, 0, 10000, "Voliv", 1);
+            var gameData = new GameData();
             var staticMenu = new StaticMenu();
             var newEvent = new TravelDialogue();
             int item1 = 0;

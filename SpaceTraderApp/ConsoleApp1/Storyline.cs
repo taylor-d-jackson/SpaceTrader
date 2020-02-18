@@ -13,6 +13,8 @@ namespace ConsoleApp1
 
         public GameData Storyline(GameData gameData)
         {
+
+            
             double currency = gameData.Currency;
             int age = gameData.Age;
             int currentCapacity = gameData.CurrentCapacity;
@@ -24,23 +26,39 @@ namespace ConsoleApp1
             string altari = "Altari";
             string zadesta = "Zadesta";
             string voliv = "Voliv";
+            var classEarth = new Earth();
+            var classAltari = new Altari();
+            var classAlphaCentauri = new AlphaCentauri();
+            var classZadesta = new Zadesta();
+            var classVoliv = new Voliv();
+
+
 
             //TODO: Select a location to travel from a scrolling list model. Use task tracker as a model.
-            
+
             Console.WriteLine($"Where would you like to travel: {earth} || {alphaCentauri} || {altari} || {zadesta} || {voliv} ");
             gameData.ShipLocation = Console.ReadLine();
             Console.Clear();
+            var activePlanet = gameData.ShipLocation;
+            
             
 
             switch (travelCounter)
                     {
                         case 1:
                         Console.WriteLine($"You've arrived on {gameData.ShipLocation} after a long journey. After securing your spaceship you head to the marketplace to see what they have to offer.");
+                    
                             gameData.TravelCounter++;
                             gameData.Age = gameData.Age + 4;
-                        
+                            classEarth.EarthGoods();
+
                             
-                        break;
+                            
+                            
+                    
+
+
+                    break;
                         case 2:
                         Console.WriteLine($"Having landed on {gameData.ShipLocation} after a long journey, you head to the local cantina to grab a drink and to try to gather information on good deals.\n " +
                                 $"You finish your drink and head to the marketplace to hopefully make a quick Spacebuck");

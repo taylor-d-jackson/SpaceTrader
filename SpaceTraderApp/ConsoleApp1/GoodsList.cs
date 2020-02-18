@@ -8,6 +8,7 @@ namespace ConsoleApp1
     {
         string Name;
         int Cost;
+        
 
 
         
@@ -17,29 +18,19 @@ namespace ConsoleApp1
             this.Cost = cost;
         }
 
-        class Item
-        {
-            string Name;
-            int Cost;
+       
 
-            public Item(string name, int cost)
-            {
-                this.Name = name;
-                this.Cost = cost;
-            }
-        }
+        //List<GoodsList> shop = new List<GoodsList>();
+        //shop.Add(new GoodsList("BioFuel", 72);
+        //shop.Add(new GoodsList("FrogArmor", 1009992);
 
-        List<Item> shop = new List<Item>();
-        shop.Add(new Item("BioFuel", 72);
-        shop.Add(new Item("FrogArmor", 1009992);
-
-        class Character
-        {
-            List<Item> Inventory;
-        }
+        //class Character
+        //{
+        //    List<GoodsList> Inventory;
+        //}
         
     }
 
-
+    
 
 }
