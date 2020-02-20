@@ -32,12 +32,12 @@ namespace ConsoleApp1
         public void VolivGoods()
         {
             List<GoodsList> shop = new List<GoodsList>();
-            shop.Add(new GoodsList("Biofuel", 72));
-            shop.Add(new GoodsList("Osmium", 78));
-            shop.Add(new GoodsList("Ship Core Reactor", 80));
-            shop.Add(new GoodsList("Rubidium", 89));
-            shop.Add(new GoodsList("Samarium", 92));
-            shop.Add(new GoodsList("Lutetium", 100));
+            shop.Add(new GoodsList("Biofuel", 72, 1));
+            shop.Add(new GoodsList("Osmium", 78, 1));
+            shop.Add(new GoodsList("Ship Core Reactor", 80, 1));
+            shop.Add(new GoodsList("Rubidium", 89, 1));
+            shop.Add(new GoodsList("Samarium", 92, 1));
+            shop.Add(new GoodsList("Lutetium", 100, 1));
         }
     }
 }

@@ -14,12 +14,14 @@ namespace ConsoleApp1
             int totalShipCapacity = gameData.TotalShipCapacity;
             string shipLocation = gameData.ShipLocation;
             int travelCounter = gameData.TravelCounter;
+            
 
             
 
-            Console.WriteLine("========================================================================================================================");
-            Console.WriteLine($"                       SpaceBucks: {gameData.Currency} || Age: {age} || Cargo Capacity: {currentCapacity} // {totalShipCapacity} || Current Location: {shipLocation}                             ");
-            Console.WriteLine("========================================================================================================================");
+            Console.WriteLine("================================================================================================================================================================");
+            Console.WriteLine($"                                      SpaceBucks: {gameData.Currency} || Age: {age} || Cargo Capacity: {currentCapacity} // {totalShipCapacity} || Current Location: {shipLocation}                             ");
+            Console.WriteLine("================================================================================================================================================================");
+            Console.WriteLine("\n"+"\n");
             
         }
     }

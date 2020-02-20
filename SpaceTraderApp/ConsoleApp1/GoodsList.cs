@@ -8,17 +8,24 @@ namespace ConsoleApp1
     {
         string Name;
         int Cost;
+        int Capacity;
         
 
 
         
-        public GoodsList(string name, int cost)
+        public GoodsList(string name, int cost, int capacity)
         {
             this.Name = name;
             this.Cost = cost;
+            this.Capacity = capacity;
         }
 
-       
+        public override string ToString()
+        {
+            return $"{Cost} - {Name}";
+        }
+
+
 
         //List<GoodsList> shop = new List<GoodsList>();
         //shop.Add(new GoodsList("BioFuel", 72);
@@ -28,7 +35,7 @@ namespace ConsoleApp1
         //{
         //    List<GoodsList> Inventory;
         //}
-        
+
     }
 
     

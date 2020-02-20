@@ -33,12 +33,12 @@ namespace ConsoleApp1
         public void ZadestaGoods()
         {
             List<GoodsList> shop = new List<GoodsList>();
-            shop.Add(new GoodsList("Weapons", 30));
-            shop.Add(new GoodsList("Silver", 33));
-            shop.Add(new GoodsList("Explosives", 35));
-            shop.Add(new GoodsList("Gold", 47));
-            shop.Add(new GoodsList("Anti-Matter Cells", 49));
-            shop.Add(new GoodsList("Capacitors", 53));
+            shop.Add(new GoodsList("Weapons", 30, 1));
+            shop.Add(new GoodsList("Silver", 33, 1));
+            shop.Add(new GoodsList("Explosives", 35, 1));
+            shop.Add(new GoodsList("Gold", 47, 1));
+            shop.Add(new GoodsList("Anti-Matter Cells", 49, 1));
+            shop.Add(new GoodsList("Capacitors", 53, 1));
         }
     }
 }

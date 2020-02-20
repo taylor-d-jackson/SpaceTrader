@@ -32,12 +32,12 @@ namespace ConsoleApp1
         public void AltariGoods()
         {
             List<GoodsList> shop = new List<GoodsList>();
-            shop.Add(new GoodsList("Nickel", 20));
-            shop.Add(new GoodsList("Medical Supply Bag", 20));
-            shop.Add(new GoodsList("Water Pack", 22));
-            shop.Add(new GoodsList("Radio Communicator", 26));
-            shop.Add(new GoodsList("Nitrogen", 28));
-            shop.Add(new GoodsList("Solar Panels", 67));
+            shop.Add(new GoodsList("Nickel", 20, 1));
+            shop.Add(new GoodsList("Medical Supply Bag", 20, 1));
+            shop.Add(new GoodsList("Water Pack", 22, 1));
+            shop.Add(new GoodsList("Radio Communicator", 26, 1));
+            shop.Add(new GoodsList("Nitrogen", 28, 1));
+            shop.Add(new GoodsList("Solar Panels", 67, 1));
         }
     }
 }

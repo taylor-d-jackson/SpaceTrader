@@ -31,12 +31,12 @@ namespace ConsoleApp1
         public void AlphaCentauriGoods()
         {
             List<GoodsList> shop = new List<GoodsList>();
-            shop.Add(new GoodsList("Food Crate", 10));
-            shop.Add(new GoodsList("MoonBrew", 11));
-            shop.Add(new GoodsList("Oxygen Cells", 15));
-            shop.Add(new GoodsList("Tools", 18));
-            shop.Add(new GoodsList("Space Narcotics", 19));
-            shop.Add(new GoodsList("Iridium", 64));
+            shop.Add(new GoodsList("Food Crate", 10, 1));
+            shop.Add(new GoodsList("MoonBrew", 11, 1));
+            shop.Add(new GoodsList("Oxygen Cells", 15, 1));
+            shop.Add(new GoodsList("Tools", 18, 1));
+            shop.Add(new GoodsList("Space Narcotics", 19, 1));
+            shop.Add(new GoodsList("Iridium", 64, 1));
         }
     }
 }
