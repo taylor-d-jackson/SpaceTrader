@@ -1,22 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace ConsoleApp1
 {
     class TravelDialogue
     {
-        bool Planet = true;
+        
+        
         string earth = "Earth";
         string voliv = "Voliv";
         string zadesta = "Zadesta";
         string altari = "Altari";
         string alphaCentauri = "Alpha Centauri";
-
+        
+        Planet planet;
         
 
         public GameData Marketplace(GameData gameData)
         {
+
+
+            
+            
             var planetEarth = new Planet
             {
                 Name = "Earth",
@@ -36,7 +43,7 @@ namespace ConsoleApp1
 
             };
 
-
+            
 
             var planetAltari = new Planet
             {
@@ -105,48 +112,418 @@ namespace ConsoleApp1
                 }
 
             };
+            
             if (gameData.ShipLocation == earth)
             {
-                foreach (var printString in planetEarth.shop) { Console.WriteLine(printString.ToString()); }
-
+                planet = planetEarth;
+                BuySell(planet, gameData);
+                
             }
+            
             if (gameData.ShipLocation == voliv)
             {
-                foreach (var printString in planetVoliv.shop) { Console.WriteLine(printString.ToString()); }
+                planet = planetVoliv;
+                BuySell(planet, gameData);
             }
+            
             if (gameData.ShipLocation == alphaCentauri)
             {
-                foreach (var printString in planetAlphaCentauri.shop) { Console.WriteLine(printString.ToString()); }
+                planet = planetAlphaCentauri;
+                BuySell(planet, gameData);
             }
+            
             if (gameData.ShipLocation == zadesta)
             {
-                foreach (var printString in planetZadesta.shop) { Console.WriteLine(printString.ToString()); }
+                planet = planetZadesta;
+                BuySell(planet, gameData);
             }
+            
             if (gameData.ShipLocation == altari)
             {
-                foreach (var printString in planetAltari.shop) { Console.WriteLine(printString.ToString()); }
+                planet = planetAltari;
+                BuySell(planet, gameData);
             }
 
-            Console.WriteLine("Which item would you like to buy?");
+            
+            
 
 
             return gameData;
+        }
+
+        public GameData Inventory(GameData gameData)
+        {
+
+            for (int i = 0; i < gameData.Inventory.Count; i++)
+            {
+                Console.WriteLine($"{i}. {gameData.Inventory[i]}");
+            }
+            return gameData;
+        }
+
+        public GameData BuySell(Planet planet, GameData gameData)
+        {
+            bool exit = false;
+            
+
+            do
+            {
+                Console.WriteLine("To purchase an item press: b\n" +
+                                  "To sell an item press: s\n" +
+                                  "To return to the previous menu press: x\n");
+
+                var menuSelection = Console.ReadKey().KeyChar;
+                if (menuSelection == 'b')
+                {
+                    for (int i = 0; i < planet.shop.Count; i++)
+                    {
+                        Console.WriteLine($"{i}. {planet.shop[i]}");
+                    }
+
+                    Console.WriteLine("\nWhich item would you like to buy?");
+
+                    int purchaseSelection = int.Parse(Console.ReadLine());
+
+                    Console.WriteLine($"How many {planet.shop[purchaseSelection]}'s would you like to buy?");
+
+                    int quantitySelection = int.Parse(Console.ReadLine());
+
+                    for (int i = 1; i <= quantitySelection; i++)
+                    {
+                        int newCurrency;
+                        newCurrency = gameData.Currency - planet.shop[purchaseSelection].Cost;
+                        gameData.Inventory.Add(planet.shop[purchaseSelection]);
+                        gameData.Currency = newCurrency;
+                        gameData.CurrentCapacity++;
+
+                    }
+                }
+                if (menuSelection == 's')
+                {
+                    for (int i = 0; i < gameData.Inventory.Count; i++)
+                    {
+                        Console.WriteLine($"{i}. {gameData.Inventory[i]}");
+                    }
+
+                    Console.WriteLine("\nWhich item would you like to sell?");
+
+                    int saleSelection = int.Parse(Console.ReadLine());
+
+                    Console.WriteLine($"How many {gameData.Inventory[saleSelection]}'s would you like to sell?");
+
+                    int quantitySelection = int.Parse(Console.ReadLine());
+
+                    for (int i = 1; i <= quantitySelection; i++)
+                    {
+                        int newCurrency;
+                        newCurrency = gameData.Currency + gameData.Inventory[saleSelection].Cost;
+                        gameData.Inventory.Remove(gameData.Inventory[saleSelection]);
+                        gameData.Currency = newCurrency;
+                        gameData.CurrentCapacity--;
+                    }
+                }
+                if (menuSelection == 'x')
+                {
+                    exit = true;
+                }
+
+
+            } while (exit == false) ;
+
+
+
+            //inventory.Add(allitems[index]);
+
+            return (gameData);
+
         }
 
         public GameData Cantina(GameData gameData)
         {
+            
+            switch (gameData.TravelCounter)
+            {
+                case 1:
+                    Console.WriteLine("An alien pack wants to know more about Earth's atmosphere and will pay you for a guided tour.");
+                    Console.WriteLine("\nWhat would you like to do? \n1.) Agree to the tour request. \n2.) Tell the leader you want a tour of Zadesta first \n3.) Reject the tour request.");
+
+                    var menuSelection = Console.ReadKey().KeyChar;
+
+                    
+                    
+                    if (menuSelection == '1')
+                    {
+                        Console.Clear();
+                        Console.WriteLine("You have received 100 Spacebucks from the Alien pack leader for his gratitude.");
+                        var newCurrency = gameData.Currency + 100;
+                        gameData.Currency = newCurrency;
+                    }
+                    if (menuSelection == '2')
+                    {
+                        Console.WriteLine("You have offended the Alien pack leader and paid them 58 Spacebucks in order to calm them down.");
+                        var newCurrency = gameData.Currency - 58;
+                        gameData.Currency = newCurrency;
+                    }
+                    if (menuSelection == '3')
+                    {
+                        Console.WriteLine("You reject the tour request and the aliens go on their way.");
+                    }
+                    break;
+
+                case 2:
+                    Console.WriteLine("A rogue general has asked you to deliver a package to Altari.  You cannot open it prior to delivery.");
+                    Console.WriteLine("\nWhat would you like to do? \n1.) Agree to deliver the package. \n2.) Agree to deliver the package but open it first to ensure it's safe. \n3.) Reject to deliver the package.");
+
+                    var menuSelection1 = Console.ReadKey().KeyChar;
+
+
+
+                    if (menuSelection1 == '1')
+                    {
+                        Console.WriteLine("You have received 245 Spacebucks from the general to deliver the package.");
+                        var newCurrency = gameData.Currency + 245;
+                        gameData.Currency = newCurrency;
+                    }
+                    if (menuSelection1 == '2')
+                    {
+                        Console.WriteLine("An alarm sounds and the package self destructs causing damage to your ship. You pay 299 spacebucks to repair the damage.");
+                        var newCurrency = gameData.Currency - 299;
+                        gameData.Currency = newCurrency;
+                    }
+                    if (menuSelection1 == '3')
+                    {
+                        Console.WriteLine("You refuse to deliver the package.");
+                    }
+
+                    break;
+
+                case 3:
+                    Console.WriteLine($"You've landed on {gameData.ShipLocation}. A gang of space pirates threaten to take your ship. ");
+                    Console.WriteLine("\nWhat would you like to do? \n1.) Try to talk your way out of the situation.(risking death). \n2.) Try to pay them off. \n3.) Try to run.");
+
+                    var menuSelection2 = Console.ReadKey().KeyChar;
+
+
+
+                    if (menuSelection2 == '1')
+                    {
+                        Console.WriteLine("Through some tense moments you end up connecting with the gang leader. The gang doesn't kill you and even leave you with a small amount of money for your travels.");
+                        var newCurrency = gameData.Currency + 115;
+                        gameData.Currency = newCurrency;
+                    }
+                    if (menuSelection2 == '2')
+                    {
+                        Console.WriteLine("Tensions grow but the gang begrudgingly allows you to live for a small fee of 110 spacebucks.");
+                        var newCurrency = gameData.Currency - 110;
+                        gameData.Currency = newCurrency;
+                    }
+                    if (menuSelection2 == '3')
+                    {
+                        Console.WriteLine("You are able to outrun the gang and lose them in an asteroid field.");
+                    }
+
+                    break;
+
+                case 4:
+                    Console.WriteLine($"You've landed on {gameData.ShipLocation}. You discover a crashed spaceship. ");
+                    Console.WriteLine("\nWhat would you like to do? \n1.) Do not go inside. \n2.) Go inside and see if you can salvage anything. \n3.) Enter the ship to see if anyone needs medical attention.");
+
+                    var menuSelection3 = Console.ReadKey().KeyChar;
+
+
+
+                    if (menuSelection3 == '1')
+                    {
+                        Console.WriteLine("You leave the ship alone and head back to what you were doing. You find 20 spacebucks on the way back to your ship.");
+                        var newCurrency = gameData.Currency + 20;
+                        gameData.Currency = newCurrency;
+                    }
+                    if (menuSelection3 == '2')
+                    {
+                        Console.WriteLine("You enter the ship. A core reactor explodes and you are lucky to escape with your life. You had to pay 125 spacebucks for medical treatment.");
+                        var newCurrency = gameData.Currency - 125;
+                        gameData.Currency = newCurrency;
+                    }
+                    if (menuSelection3 == '3')
+                    {
+                        Console.WriteLine("You enter the ship but don't find anyone on board so you leave the ship.");
+                    }
+
+                    break;
+
+                case 5:
+                    Console.WriteLine($"You've been invited to a party by a rich citizen on {gameData.ShipLocation}.");
+                    Console.WriteLine("\nWhat would you like to do? \n1.) Head to the party with gifts for your host.. \n2.) Refuse the party invitation. \n3.) Offer to DJ the party.");
+
+                    var menuSelection4 = Console.ReadKey().KeyChar;
+
+
+
+                    if (menuSelection4 == '1')
+                    {
+                        Console.WriteLine("You head to the party. Your host is so thankful for his small gift that he gifts you a rare artifact worth 400 spacebucks.");
+                        var newCurrency = gameData.Currency + 400;
+                        gameData.Currency = newCurrency;
+                    }
+                    if (menuSelection4 == '2')
+                    {
+                        Console.WriteLine("You refuse the party invitation. Your host is offended and hires a gang of ruffians to beat you up. They steal the money you had on you.");
+                        var newCurrency = gameData.Currency - 45;
+                        gameData.Currency = newCurrency;
+                    }
+                    if (menuSelection4 == '3')
+                    {
+                        Console.WriteLine($"You DJ the party. It is underwhelmning and the guests are not impressed. Your dreams of being a DJ die on {gameData.ShipLocation}.");
+                    }
+                    break;
+
+                case 6:
+                    Console.WriteLine($"You've landed on {gameData.ShipLocation} but your ship is stuck in space rubble.");
+                    Console.WriteLine("\nWhat would you like to do? \n1.) Accept help from a shifty looking space port mechanic. \n2.) Leave the ship now and come back with more help. \n3.) Attempt to blow your way out of the rubble.");
+
+                    var menuSelection5 = Console.ReadKey().KeyChar;
+
+
+
+                    if (menuSelection5 == '1')
+                    {
+                        Console.WriteLine("\"Shifty\" helps remove your ship from the rubble. You play a round of poker afterwards and win 85 spacebucks from him.");
+                        var newCurrency = gameData.Currency + 85;
+                        gameData.Currency = newCurrency;
+                    }
+                    if (menuSelection5 == '2')
+                    {
+                        Console.WriteLine("You leave the ship to look for help. When you come back you notice some of your supplies are missing. You lose 163 spacebucks.");
+                        var newCurrency = gameData.Currency - 163;
+                        gameData.Currency = newCurrency;
+                    }
+                    if (menuSelection5 == '3')
+                    {
+                        Console.WriteLine($"You successfully blow your ship out of the rubble on {gameData.ShipLocation}.");
+                    }
+                    break;
+
+                case 7:
+                    Console.WriteLine($"A king on {gameData.ShipLocation} offers you spacebucks in exchange for jokes from Earth.");
+                    Console.WriteLine("\nWhat would you like to do? \n1.) Tell him jokes from Louis C.K. \n2.) Tell him jokes from Dane Cook. \n3.) Tell him jokes from Bill Burr.");
+
+                    var menuSelection6 = Console.ReadKey().KeyChar;
+
+
+
+                    if (menuSelection6 == '1')
+                    {
+                        Console.WriteLine("The king laughs so much that he blows his drink out of his 7 nostrils. He pays you 130 Spacebucks.");
+                        var newCurrency = gameData.Currency + 130;
+                        gameData.Currency = newCurrency;
+                    }
+                    if (menuSelection6 == '2')
+                    {
+                        Console.WriteLine("The king has heard these jokes before. He charges you for his time. Now you're out 100 Spacebucks over some jokes.");
+                        var newCurrency = gameData.Currency - 100;
+                        gameData.Currency = newCurrency;
+                    }
+                    if (menuSelection6 == '3')
+                    {
+                        Console.WriteLine($"The king laughs but says that he's heard better.");
+                    }
+                    break;
+
+                case 8:
+                    Console.WriteLine($"A warrior on {gameData.ShipLocation} offers to train you for a small amount of money.");
+                    Console.WriteLine("\nWhat would you like to do? \n1.) Have the warrior train you with weapons. \n2.) Have the warrior teach you the Killer Alien Death Strike. \n3.) Have them teach you defensive moves.");
+
+                    var menuSelection7 = Console.ReadKey().KeyChar;
+
+
+
+                    if (menuSelection7 == '1')
+                    {
+                        Console.WriteLine("The warrior trains you with weapons. He is so impressed with your progress that he gives you an Altarian blade worth 235 spacebucks.");
+                        var newCurrency = gameData.Currency + 235;
+                        gameData.Currency = newCurrency;
+                    }
+                    if (menuSelection7 == '2')
+                    {
+                        Console.WriteLine("The warrior almost kills you demonstrating the Killer ALien Death Strike. Your medical bills are 332 spacebucks.");
+                        var newCurrency = gameData.Currency - 332;
+                        gameData.Currency = newCurrency;
+                    }
+                    if (menuSelection7 == '3')
+                    {
+                        Console.WriteLine($"You have a better understaning of how to defend yourself.");
+                    }
+                    break;
+
+                case 9:
+                    Console.WriteLine($"Police on {gameData.ShipLocation} stop you to ask about illegal activity.");
+                    Console.WriteLine("\nWhat would you like to do? \n1.) Show the police you are not carrying anything illegal. \n2.) Dump your contraband. \n3.) Offer the police a \"gift\".");
+
+                    var menuSelection8 = Console.ReadKey().KeyChar;
+
+
+
+                    if (menuSelection8 == '1')
+                    {
+                        Console.WriteLine("After their inspection the police refer you to a merchant you cuts you a good deal. You earn 239 Spacebucks from the deal.");
+                        var newCurrency = gameData.Currency + 239;
+                        gameData.Currency = newCurrency;
+                    }
+                    if (menuSelection8 == '2')
+                    {
+                        Console.WriteLine("You attempt to dump your contraband but the police catch you and fine you 255 Spacebucks.");
+                        var newCurrency = gameData.Currency - 255;
+                        gameData.Currency = newCurrency;
+                    }
+                    if (menuSelection8 == '3')
+                    {
+                        Console.WriteLine($"You offer the police a gift. They laugh and wave you on.");
+                    }
+                    break;
+
+                case 10:
+                    Console.WriteLine($"Your ship needs repairs.");
+                    Console.WriteLine("\nWhat would you like to do? \n1.) Attempt to fix the problem yourself. \n2.) Trade for a new ship. \n3.) Hire a repair service.");
+
+                    var menuSelection9 = Console.ReadKey().KeyChar;
+
+
+
+                    if (menuSelection9 == '1')
+                    {
+                        Console.WriteLine("You buy a used modulator. Stuffed in documentation is a small amount of money. Your ship is repaired and you earn 175 Spacebucks.");
+                        var newCurrency = gameData.Currency + 175;
+                        gameData.Currency = newCurrency;
+                    }
+                    if (menuSelection9 == '2')
+                    {
+                        Console.WriteLine("You trade in your old ship for a newer model. It's a lemon and you have to pay to have the new one repaired. You're out 435 Spacebucks.");
+                        var newCurrency = gameData.Currency - 435;
+                        gameData.Currency = newCurrency;
+                    }
+                    if (menuSelection9 == '3')
+                    {
+                        Console.WriteLine($"You hire a repair service. They forget to bill you and you go on your way.");
+                    }
+                    break;
+
+
+
+
+
+                default:
+                    break;
+            }
+            //Console.ReadLine();
             return gameData;
         }
 
-        public GameData Travel(GameData gameData)
-        {
-            return gameData;
-        }
+        
 
         public GameData Storyline(GameData gameData)
         {
 
-            
+            var staticMenu = new StaticMenu();
             double currency = gameData.Currency;
             int age = gameData.Age;
             int currentCapacity = gameData.CurrentCapacity;
@@ -162,7 +539,7 @@ namespace ConsoleApp1
 
 
 
-            //TODO: Call and print the shop list values for each planet.
+            
             //TODO: Select a location to travel from a scrolling list model. Use task tracker as a model.
 
 
@@ -175,6 +552,8 @@ namespace ConsoleApp1
             switch (travelCounter)
             {
                 case 1:
+
+                    staticMenu.App(gameData);
                     Console.WriteLine($"You've arrived on {gameData.ShipLocation} after a long journey. After securing your spaceship you head to the marketplace to see what they have to offer.");
 
                     gameData.TravelCounter++;

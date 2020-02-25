@@ -4,11 +4,11 @@ using System.Text;
 
 namespace ConsoleApp1
 {
-    class GoodsList
+    public class GoodsList
     {
         string Name;
-        int Cost;
-        int Capacity;
+        public int Cost;
+        public int Capacity;
         
 
 
@@ -22,7 +22,7 @@ namespace ConsoleApp1
 
         public override string ToString()
         {
-            return $"{Cost} - {Name}";
+            return $"{Name} -- Cost: {Cost}\nCapacity: {Capacity}\n";
         }
 
 

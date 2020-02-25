@@ -10,6 +10,7 @@ namespace ConsoleApp1
             var gameData = new GameData();
             var staticMenu = new StaticMenu();
             var newEvent = new TravelDialogue();
+            var cantina = new TravelDialogue();
             int item1 = 0;
             int quan = 0;
             var randEvent = new PositiveEvent();
@@ -23,27 +24,44 @@ namespace ConsoleApp1
                 //TODO: Incorporate random selection for item to associate with a good from our goods list and set the random value of quantity to give us that amount of that item.
                 //TODO: Make NegativeEvent Class
                 //TODO: Make Positive Event Class
-                
+                //staticMenu.App(gameData);
                 do
                 {
                     staticMenu.App(gameData);
-                    Console.WriteLine($"What would you like to do: 1.) Travel to a New Planet 2.) Head to the Cantina 3.) Head to the Marketplace 4.) View Map");
+                    Console.WriteLine($"What would you like to do: 1.) Travel to a New Planet 2.) Head to the Cantina 3.) Head to the Marketplace 4.) View Map 5.) View Inventory");
                     
                     var menuSelection = Console.ReadKey().KeyChar;
                     if (menuSelection == '1')
                     {
-                        Console.Clear();
-                        staticMenu.App(gameData);
-                        newEvent.Storyline(gameData);
-                        
-                        
+
+
+                            Console.Clear();
+                            
+                            staticMenu.App(gameData);
+                            
+                            newEvent.Storyline(gameData);
+                            
+                            Console.WriteLine("\nPress enter to continue");
+
+                            Console.ReadLine();
+
+                            Console.Clear();
+
+
+
                         break;
+
+                        
+                        
                     }
                     if (menuSelection == '2')
                     {
                         //TODO: Add the Pos/Neg/Neut random event here.
+                        Console.Clear();
                         staticMenu.App(gameData);
-                        randEvent.Event(item1, quan, gameData);
+                        cantina.Cantina(gameData);
+                        Console.ReadLine();
+                        Console.Clear();
                         
                         break;
                     }
@@ -58,14 +76,14 @@ namespace ConsoleApp1
                             Console.Clear();
                             
                             staticMenu.App(gameData);
-                            Console.WriteLine("Here's what the marketplace has to offer: \n \n ");
+                            
                             newEvent.Marketplace(gameData);
-                            Console.WriteLine("\n\nPress the Escape (Esc) key to return to the previous menu: \n");
-                            cki = Console.ReadKey();
+                            //Console.WriteLine("\n\nPress the Escape (Esc) key to return to the previous menu: \n");
+                            //cki = Console.ReadKey();
                             Console.Clear();
                             break;
 
-                        } while (true);
+                        } while (cki.Key != ConsoleKey.Escape);
                         
                         
                         
@@ -90,6 +108,24 @@ namespace ConsoleApp1
                         } while (cki.Key != ConsoleKey.Escape);
 
                     }
+
+                    if (menuSelection == '5')
+                    {
+                        ConsoleKeyInfo cki;
+
+                        do
+                        {
+                            Console.Clear();
+                            staticMenu.App(gameData);
+                            newEvent.Inventory(gameData);
+                            Console.WriteLine("\n\nPress the Escape (Esc) key to return to the previous menu: \n");
+                            cki = Console.ReadKey();
+                            Console.Clear();
+                            break;
+
+                        } while (cki.Key != ConsoleKey.Escape);
+                    }
+
                 } while (true);
                 
                 
