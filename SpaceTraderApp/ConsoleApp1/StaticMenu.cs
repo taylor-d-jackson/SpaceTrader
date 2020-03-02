@@ -9,6 +9,8 @@ namespace ConsoleApp1
         public void App(GameData gameData)
         {
             
+            //Creates a Method for the games "Static Menu". The menu that constantly updates you age, currency, cargo capacity, and your location as the game progresses.
+
             int age = gameData.Age;
             int currentCapacity = gameData.CurrentCapacity;
             int totalShipCapacity = gameData.TotalShipCapacity;

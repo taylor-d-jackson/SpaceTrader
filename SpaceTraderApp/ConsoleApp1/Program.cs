@@ -20,11 +20,7 @@ namespace ConsoleApp1
 
             do
             {
-                //TODO: Able to pass item value, a quantity value and update the static menu with changed spacebucks from the Event Class.
-                //TODO: Incorporate random selection for item to associate with a good from our goods list and set the random value of quantity to give us that amount of that item.
-                //TODO: Make NegativeEvent Class
-                //TODO: Make Positive Event Class
-                //staticMenu.App(gameData);
+                
                 do
                 {
                     staticMenu.App(gameData);
@@ -56,7 +52,7 @@ namespace ConsoleApp1
                     }
                     if (menuSelection == '2')
                     {
-                        //TODO: Add the Pos/Neg/Neut random event here.
+                        
                         Console.Clear();
                         staticMenu.App(gameData);
                         cantina.Cantina(gameData);
@@ -69,7 +65,7 @@ namespace ConsoleApp1
                     {
                         ConsoleKeyInfo cki;
 
-                        //TODO: Buy and Sell from inventory
+                        
 
                         do
                         {

@@ -8,6 +8,8 @@ namespace ConsoleApp1
     {
         public GameData DynamicMap(GameData gameData)
         {
+
+            //Creates a primitive Map for every location you can travel to from the menu
             
             string shipLocation = gameData.ShipLocation;
             

@@ -6,13 +6,14 @@ namespace ConsoleApp1
 {
     public class GoodsList
     {
+
+        //Creates the Goodslist class which defines the Name, Cost, and Capacity for each Planet's shop.
+
         string Name;
         public int Cost;
         public int Capacity;
-        
 
 
-        
         public GoodsList(string name, int cost, int capacity)
         {
             this.Name = name;
@@ -24,17 +25,6 @@ namespace ConsoleApp1
         {
             return $"{Name} -- Cost: {Cost}\nCapacity: {Capacity}\n";
         }
-
-
-
-        //List<GoodsList> shop = new List<GoodsList>();
-        //shop.Add(new GoodsList("BioFuel", 72);
-        //shop.Add(new GoodsList("FrogArmor", 1009992);
-
-        //class Character
-        //{
-        //    List<GoodsList> Inventory;
-        //}
 
     }
 

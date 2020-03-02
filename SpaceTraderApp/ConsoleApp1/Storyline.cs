@@ -14,14 +14,13 @@ namespace ConsoleApp1
         string zadesta = "Zadesta";
         string altari = "Altari";
         string alphaCentauri = "Alpha Centauri";
-        
         Planet planet;
         
 
         public GameData Marketplace(GameData gameData)
         {
 
-
+            //Creates our 5 planets and defines the goods available for trade at each planet.
             
             
             var planetEarth = new Planet
@@ -113,6 +112,8 @@ namespace ConsoleApp1
 
             };
             
+            //Series of IF statements that will run the Buy/Sell Method to purchase/sell goods depending on where you are located.
+
             if (gameData.ShipLocation == earth)
             {
                 planet = planetEarth;
@@ -152,6 +153,9 @@ namespace ConsoleApp1
         }
 
         public GameData Inventory(GameData gameData)
+
+            //Method that lists your current inventory
+
         {
 
             for (int i = 0; i < gameData.Inventory.Count; i++)
@@ -163,6 +167,12 @@ namespace ConsoleApp1
 
         public GameData BuySell(Planet planet, GameData gameData)
         {
+            
+            //Method that gives you the option to buy or sell from a menu.
+            //Based on the users selection will list the goods available to purchase or list your goods available to sell.
+            //Updates player currency
+            //Updates Cargo capacity
+            
             bool exit = false;
             
 
@@ -174,11 +184,15 @@ namespace ConsoleApp1
 
                 var menuSelection = Console.ReadKey().KeyChar;
                 if (menuSelection == 'b')
+
+                //Buy code segment
+
                 {
                     for (int i = 0; i < planet.shop.Count; i++)
                     {
                         Console.WriteLine($"{i}. {planet.shop[i]}");
                     }
+
 
                     Console.WriteLine("\nWhich item would you like to buy?");
 
@@ -198,6 +212,9 @@ namespace ConsoleApp1
 
                     }
                 }
+
+                //Sell Code Segment
+
                 if (menuSelection == 's')
                 {
                     for (int i = 0; i < gameData.Inventory.Count; i++)
@@ -209,18 +226,15 @@ namespace ConsoleApp1
 
                     int saleSelection = int.Parse(Console.ReadLine());
 
-                    Console.WriteLine($"How many {gameData.Inventory[saleSelection]}'s would you like to sell?");
-
-                    int quantitySelection = int.Parse(Console.ReadLine());
-
-                    for (int i = 1; i <= quantitySelection; i++)
-                    {
+                    
                         int newCurrency;
                         newCurrency = gameData.Currency + gameData.Inventory[saleSelection].Cost;
                         gameData.Inventory.Remove(gameData.Inventory[saleSelection]);
                         gameData.Currency = newCurrency;
                         gameData.CurrentCapacity--;
-                    }
+                        Console.Clear();
+                        
+                    
                 }
                 if (menuSelection == 'x')
                 {
@@ -240,6 +254,9 @@ namespace ConsoleApp1
 
         public GameData Cantina(GameData gameData)
         {
+
+            //Lists the Case for the Cantina method
+            //Lists a Positive, NEgative, and Neutral player choice for each event.
             
             switch (gameData.TravelCounter)
             {
@@ -514,7 +531,7 @@ namespace ConsoleApp1
                 default:
                     break;
             }
-            //Console.ReadLine();
+            
             return gameData;
         }
 
@@ -522,6 +539,8 @@ namespace ConsoleApp1
 
         public GameData Storyline(GameData gameData)
         {
+
+            //Storyline method which prints a short story based on which planet you have traveled to.
 
             var staticMenu = new StaticMenu();
             double currency = gameData.Currency;
@@ -537,16 +556,12 @@ namespace ConsoleApp1
             string voliv = "Voliv";
 
 
-
-
-            
-            //TODO: Select a location to travel from a scrolling list model. Use task tracker as a model.
-
-
-
             Console.Clear();
+
             Console.WriteLine($"Where would you like to travel: {earth} || {alphaCentauri} || {altari} || {zadesta} || {voliv} ");
+
             gameData.ShipLocation = Console.ReadLine();
+
             Console.Clear();
 
             switch (travelCounter)

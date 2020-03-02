@@ -4,6 +4,9 @@ namespace ConsoleApp1
 {
     public class GameData
     {
+
+        //Defines the GameData class which sets the values passed to a number of methods to update information on your static menu.
+
         public int Currency = 1000;
         public int Age = 18;
         public int CurrentCapacity = 0;
